@@ -28,7 +28,7 @@ void readMap(Point* playerPosition, double *playerEyeAngle){
     for (j= 0; j < MAPSIZE; j++)
       map[i][j] = 0;
   /* open map file for reading */
-  mapfile = fopen("map.txt", "r");
+  mapfile = fopen("../map.txt", "r");
   /* read player starting x and y positions, as well as a starting rectangle */
   /*First line on the map is player x position at the beginning */
   fgets(s, MAPSIZE, mapfile);
