@@ -45,7 +45,7 @@ int runGame(void){
 	readMap(&playerPos, &playerA);
 	
 	/*load in wall texture image */
-	wall_img_surf = SDL_LoadBMP("images/wall3.bmp");
+	wall_img_surf = SDL_LoadBMP("../images/wall3.bmp");
 	
 	/* main loop */
 	while(!quit){
