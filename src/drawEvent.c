@@ -2,6 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include <stdio.h>
 double playerA = 0.0;
+/* screen dimension contants */
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 void *pixels = NULL;
@@ -14,12 +15,16 @@ int x;
  * Return: false
  */
 bool mouseEvents(SDL_Event mouse_event){
+	/* Assume speed at which the player can rotate */
 	const double player_angular_speed_of_rotation = 0.025;
+		
+	/* mouse events for 360 degree rotation */
 	while(SDL_PollEvent(&mouse_event) != 0){
 		if (mouse_event.type == SDL_QUIT){
 			return true;
 		}
 		if (mouse_event.type == SDL_MOUSEMOTION){
+			/* relative motion in the X direction times angular speed*/
 			playerA += mouse_event.motion.xrel * player_angular_speed_of_rotation;
 		}
 	}
@@ -38,7 +43,9 @@ bool handleAllEvents(SDL_Event e){
 	const Uint8* currentKeyStates;
 
 	currentKeyStates = SDL_GetKeyboardState(0);
+	/* call mouse based event for 360 degree rotation of a player */
 	mouseEvents(e);
+	/* scan keyboard events */
 	if (currentKeyStates[SDL_SCANCODE_ESCAPE]){
 		return true;
 	}
@@ -78,7 +85,6 @@ void drawFloor(){
 	for (y = 0; y < SCREEN_HEIGHT / 2; y++){
 		Uint8 color = 255.0 - 255.0 * ((float)y / (float)SCREEN_HEIGHT);
 		Uint32 floorColor = ((0 + color) << 16) + 255;
-
 		for (x = 0; x < SCREEN_WIDTH; x++){
 			*(((Uint32*) pixels) + SCREEN_WIDTH * (SCREEN_HEIGHT - 1) - y * SCREEN_WIDTH + x) = floorColor;
 		}
@@ -111,6 +117,8 @@ void drawCiel(){
   
 void drawWall(){
 	const double DIST_TO_PLANE_OF_PROJECTION= 1.0;
+	for (x = 0; x < SCREEN_WIDTH; x++){
+		double playerEyerayAngle, rayCastAngle, horizontal_distance, wallcoord;
 		Point rayReturn;
 		int wallHeight, actualWAllHeight, wallY;
 		Uint8 color;
@@ -166,4 +174,3 @@ void drawScreen(SDL_Renderer *renderer, SDL_Texture *screen){
 	SDL_RenderCopy(renderer, screen, NULL, NULL);
 
 }
-
