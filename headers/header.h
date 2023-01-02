@@ -8,6 +8,12 @@
 #define map_y 20
 #define map_s 20
 #define MAP_SCALE 0.25
+#define gun_scale 0.25
+#define PI 3.14159265
+#define FOV (PI / 3)
+#define num_enemy 5
+#define num_rays 60
+int x, y;
 /* useful struct tyoedef */
 typedef struct Point {
 	double x;
@@ -39,4 +45,6 @@ bool mouseEvents(SDL_Event mouse_event);
 /* DRAW EVERY THING ON WINDOW SCREEN */
 void drawScreen(SDL_Renderer* renderer, SDL_Texture* screen);
 void display_player(SDL_Renderer *renderer);
+/* GUN FUNCTION */
+void playerWeapon();
 #endif
