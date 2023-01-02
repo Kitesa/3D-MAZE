@@ -17,6 +17,7 @@ void loopDisplay(){
 		framestart = SDL_GetTicks();
 		quit = handleAllEvents(e);
 		drawScreen(renderer, screen);
+		playerWeapon();
 		frameTime = SDL_GetTicks() - framestart;
 		delayTime = 1000 / FPS - frameTime;
 		time = 1000;
