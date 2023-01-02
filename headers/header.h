@@ -29,7 +29,7 @@ SDL_Texture* screen;
 /* create player position */
 Point playerPos;
 /* textures can be global as well */
-SDL_Surface* wall_img_surf;
+SDL_Surface* w_surf;
 /* rungame */
 int runGame(void);
 
