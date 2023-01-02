@@ -3,7 +3,8 @@
 /* define map globally a lot of functions care about this */
 int map[MAP_NUM_ROWS][MAP_NUM_COLS];
 
-void loadMap(Point* playerPosition, double *playerEyeAngle){
+void loadMap(Point *playerPosition, double *playerEyeAngle)
+{
 	int i;
 	int j;
 	double s;
@@ -33,56 +34,67 @@ void loadMap(Point* playerPosition, double *playerEyeAngle){
 	s = 0;
 	*playerEyeAngle = s;
 	/* readin the map */ 
-	for ( i = 0; i < 16; i++){
-		for(j = 0; j < 20; j++){
-			if (mapCoord[i][j] == 0){
+	for( i = 0; i < 16; i++)
+	{
+		for (j = 0; j < 20; j++)
+		{
+			if (mapCoord[i][j] == 0)
+			{
 				map[i][j] = 0;
-			}else if(mapCoord[i][j] == 9){
+			} else if (mapCoord[i][j] == 9)
+			{
 				map[i][j] = 9;
-			}else{
+			}else
+			{
 				map[i][j] = 1;
 			}
 		}
 	}
 }
 
-Point distanceToWall(Point playerPosition, double playerEyeRAyAngle){
+Point distanceToWall(Point playerPosition, double playerEyeRAyAngle)
+{
 	const double raystep = 0.010;
 	double delta_x = raystep * cos(playerEyeRAyAngle);
 	double delta_y = raystep * sin(playerEyeRAyAngle);
 	double distance = 0.0;
 	Point r;
 	double x, y;
-	for (x = playerPosition.x, y = playerPosition.y; !map[(int)round(x)][(int)round(y)]; x += delta_x, y += delta_y){
+	for (x = playerPosition.x, y = playerPosition.y; !map[(int)round(x)][(int)round(y)]; x += delta_x, y += delta_y)
+
+	{
 		distance += raystep;
-		if (distance > 100){
+		if (distance > 100)
+		{
 			r.x = 100.0;
 			r.y = 0.0;
-			return r;
+			return (r);
 		}
 	}
 	if (fabs(x - round(x)) > fabs(y - round(y))){
 		r.y = modf(y, &delta_x);
-	}else{
+	}else
+	{
 		r.y = modf(x, &delta_y);
 	}
 	r.x = distance;
-	return r;
+	return (r);
 }
 
 
-void playerMovementControl(double horizontal_change, double vertical_change){
+void playerMovementControl(double horizontal_change, double vertical_change)
+{
 	if (!map[(int)round(playerPos.x + horizontal_change)][(int)round(playerPos.y)])
 	{
 		playerPos.x += horizontal_change;
-		
+
 	}
 	if (!map[(int)round(playerPos.x)][(int)round(playerPos.y + vertical_change)])
 	{
 		playerPos.y += vertical_change;
-		
-	}
 	
+	}
+
 }
 
 /**
@@ -97,6 +109,7 @@ void whereIsThePLayer(SDL_Renderer *renderer)
 	SDL_Rect rect;
 	SDL_Rect player;
 	for (counter_x = 0; counter_x < map_x; counter_x++)
+
 	{
 		for (counter_y = 0; counter_y < map_y; counter_y++)
 		{
