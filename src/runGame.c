@@ -54,7 +54,7 @@ int runGame(void){
 	}	
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	loadMap(&playerPos, &playerA);
-	wall_img_surf = SDL_LoadBMP("../images/wall3.bmp");
+	w_surf = SDL_LoadBMP("../images/wall3.bmp");
 	loopDisplay();
 	SDL_DestroyTexture(screen);
 	SDL_DestroyWindow(window);
