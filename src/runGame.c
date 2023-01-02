@@ -4,24 +4,30 @@
 
 /*
  * loopDisplay - display the window loop
- * Description: 
+ * Description:
  * Return: void
  */
- 
-void loopDisplay(){
+void loopDisplay(void)
+{
 	bool quit = false;
 	const int FPS = 60;
-	while(!quit){
+
+	while (!quit)
+{
 		Uint32 framestart, frameTime, delayTime;
 		unsigned int time;
+
 		framestart = SDL_GetTicks();
+
 		quit = handleAllEvents(e);
 		drawScreen(renderer, screen);
 		frameTime = SDL_GetTicks() - framestart;
 		delayTime = 1000 / FPS - frameTime;
 		time = 1000;
+
 		if (delayTime > time / FPS) delayTime = 0;
-		SDL_Delay(delayTime);	
+
+		SDL_Delay(delayTime);
 	}
 }
 /*
@@ -30,17 +36,23 @@ void loopDisplay(){
  * Return: None
  *
  */
-int runGame(void){
+int runGame(void)
+{
 	double playerA = 0.0;
 	const int SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480;
+
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
+
 	{
 		fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
 		return (1);
 	}
-	window = SDL_CreateWindow("ALX Maze project", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	screen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
+	window = SDL_CreateWindow("ALX Maze project", 100, 100,
+SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_OPENGL);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED
+| SDL_RENDERER_PRESENTVSYNC);
+	screen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
+SDL_TEXTUREACCESS_STREAMING, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (renderer == NULL)
 	{
 		fprintf(stderr, "SDL_CreateRenderer Error: %s\n", SDL_GetError());
@@ -51,7 +63,7 @@ int runGame(void){
 	{
 		fprintf(stderr, "Failed to initialize SDL_image.\n");
 		return (1);
-	}	
+	}
 	SDL_SetRelativeMouseMode(SDL_TRUE);
 	loadMap(&playerPos, &playerA);
 	wall_img_surf = SDL_LoadBMP("../images/wall3.bmp");
@@ -59,5 +71,5 @@ int runGame(void){
 	SDL_DestroyTexture(screen);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-	return(1);
+	return (1);
 }
