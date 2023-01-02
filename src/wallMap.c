@@ -33,8 +33,8 @@ void loadMap(Point *playerPosition, double *playerEyeAngle)
 	playerPosition->y = s;
 	s = 0;
 	*playerEyeAngle = s;
-	/* readin the map */ 
-	for( i = 0; i < 16; i++)
+	/* readin the map */
+	for ( i = 0; i < 16; i++)
 	{
 		for (j = 0; j < 20; j++)
 		{
@@ -44,7 +44,7 @@ void loadMap(Point *playerPosition, double *playerEyeAngle)
 			} else if (mapCoord[i][j] == 9)
 			{
 				map[i][j] = 9;
-			}else
+			} else
 			{
 				map[i][j] = 1;
 			}
@@ -60,6 +60,7 @@ Point distanceToWall(Point playerPosition, double playerEyeRAyAngle)
 	double distance = 0.0;
 	Point r;
 	double x, y;
+
 	for (x = playerPosition.x, y = playerPosition.y; !map[(int)round(x)][(int)round(y)]; x += delta_x, y += delta_y)
 
 	{
@@ -71,9 +72,10 @@ Point distanceToWall(Point playerPosition, double playerEyeRAyAngle)
 			return (r);
 		}
 	}
-	if (fabs(x - round(x)) > fabs(y - round(y))){
+	if (fabs(x - round(x)) > fabs(y - round(y)))
+	{
 		r.y = modf(y, &delta_x);
-	}else
+	} else
 	{
 		r.y = modf(x, &delta_y);
 	}
@@ -92,7 +94,7 @@ void playerMovementControl(double horizontal_change, double vertical_change)
 	if (!map[(int)round(playerPos.x)][(int)round(playerPos.y + vertical_change)])
 	{
 		playerPos.y += vertical_change;
-	
+
 	}
 
 }
@@ -108,6 +110,7 @@ void whereIsThePLayer(SDL_Renderer *renderer)
 	int counter_x, counter_y;
 	SDL_Rect rect;
 	SDL_Rect player;
+
 	for (counter_x = 0; counter_x < map_x; counter_x++)
 
 	{
