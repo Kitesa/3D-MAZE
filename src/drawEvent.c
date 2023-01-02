@@ -102,7 +102,6 @@ void drawFloor(void)
 	{
 		Uint8 color = 255.0 - 255.0 * ((float)y / (float)SCREEN_HEIGHT);
 		Uint32 floorColor = ((0 + color) << 16) + 255;
-
 		for (x = 0; x < SCREEN_WIDTH; x++)
 
 		{
@@ -121,13 +120,11 @@ void drawFloor(void)
 
 void drawCiel(void)
 {
-
 	for (y = 0; y < SCREEN_HEIGHT / 2; y++)
 
 	{
 		Uint8 color = 255.0 - 255.0 * ((float)y / (float)SCREEN_HEIGHT);
 		Uint32 ceilColor = ((0 + color) << 8) + 255;
-
 		for (x = 0; x < SCREEN_WIDTH; x++)
 
 		{
@@ -146,7 +143,6 @@ void drawCiel(void)
 void drawWall(void)
 {
 	const double DIST_TO_PLANE_OF_PROJECTION = 1.0;
-
 	for (x = 0; x < SCREEN_WIDTH; x++)
 
 	{
@@ -154,14 +150,12 @@ void drawWall(void)
 		Point rayReturn;
 		int wallHeight, actualWAllHeight, wallY;
 		Uint8 color;
-
 		playerEyerayAngle = atan((x - SCREEN_WIDTH / 2.0) / (SCREEN_WIDTH / 2.0));
 
 		rayCastAngle = playerA + playerEyerayAngle;
 		rayReturn = distanceToWall(playerPos, rayCastAngle);
 		horizontal_distance = rayReturn.x * cos(playerEyerayAngle);
-		wallHeight = DIST_TO_PLANE_OF_PROJECTION
-			/ horizontal_distance * SCREEN_HEIGHT * 1.5;
+		wallHeight = DIST_TO_PLANE_OF_PROJECTION / horizontal_distance * SCREEN_HEIGHT * 1.5;
 		actualWAllHeight = wallHeight;
 		wallHeight = (wallHeight > SCREEN_HEIGHT) ? SCREEN_HEIGHT : wallHeight;
 		wallY = (int)((SCREEN_HEIGHT - wallHeight) / 2);
@@ -171,7 +165,6 @@ void drawWall(void)
 			int texture_x = 0, texture_y = 0;
 			Uint8 r, g, b;
 			Uint32 wallColor = 0;
-
 			if (horizontal_distance > DIST_TO_PLANE_OF_PROJECTION)
 
 			{
@@ -184,12 +177,9 @@ void drawWall(void)
 				texture_y = ((actualWAllHeight - wallHeight) / 2.0 + y)
 					/ (float)actualWAllHeight * 127;
 			}
-			r = *(((Uint8 *) (wall_img_surf->pixels))
-			      + texture_y * 3 * 128 + 3 * texture_x + 0);
-			g = *(((Uint8 *) (wall_img_surf->pixels))
-			      + texture_y * 3 * 128 + 3*texture_x + 1);
-			b = *(((Uint8 *) (wall_img_surf->pixels))
-			      + texture_y * 3 * 128 + 3 * texture_x + 2);
+			r = *(((Uint8 *) (wall_img_surf->pixels)) + texture_y * 3 * 128 + 3 * texture_x + 0);
+			g = *(((Uint8 *) (wall_img_surf->pixels)) + texture_y * 3 * 128 + 3 * texture_x + 1);
+			b = *(((Uint8 *) (wall_img_surf->pixels)) + texture_y * 3 * 128 + 3 * texture_x + 2);
 			color = 255.0 * exp(-horizontal_distance / 30);
 			r *= color / 255.0, g *= color / 255.0, b *= color / 255.0;
 			wallColor = (((((b << 8) + g) << 8) + r) << 8) + 255;
@@ -208,7 +198,7 @@ void drawWall(void)
 void drawScreen(SDL_Renderer *renderer, SDL_Texture *screen)
 {
 	int pitch;
-	
+
 	SDL_LockTexture(screen, NULL, &pixels, &pitch);
 	drawFloor();
 	drawCiel();
