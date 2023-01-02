@@ -12,9 +12,8 @@
  * Return: success
  */
 
-int main()
+int main(void)
 {
 	runGame();
-	
-	return EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }
