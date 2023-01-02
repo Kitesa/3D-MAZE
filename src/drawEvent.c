@@ -44,7 +44,7 @@ bool mouseEvents(SDL_Event mouse_event)
 bool handleAllEvents(SDL_Event e)
 {
 	const double player_linear_speed = 0.0875;
-	const Uint8 * currentKeyStates;
+	const Uint8 *currentKeyStates;
 
 	currentKeyStates = SDL_GetKeyboardState(0);
 	/* call mouse based event for 360 degree rotation of a player */
@@ -84,13 +84,12 @@ bool handleAllEvents(SDL_Event e)
 	{
 		double delta_x = cos(playerA + 1.57) * player_linear_speed;
 		double delta_y = sin(playerA + 1.57) * player_linear_speed;
-		
+
 		playerMovementControl(delta_x, delta_y);
 
 	}
 	return (false);
 }
-
 /*
  * drawFloor - a function to draw a floor
  * Description:
@@ -107,7 +106,7 @@ void drawFloor(void)
 		for (x = 0; x < SCREEN_WIDTH; x++)
 
 		{
-			*(((Uint32*) pixels) + SCREEN_WIDTH *
+			*(((Uint32 *) pixels) + SCREEN_WIDTH *
 			  (SCREEN_HEIGHT - 1) - y * SCREEN_WIDTH + x) = floorColor;
 		}
 	}
@@ -120,7 +119,7 @@ void drawFloor(void)
  *
  */
 
-void drawCiel()
+void drawCiel(void)
 {
 
 	for (y = 0; y < SCREEN_HEIGHT / 2; y++)
@@ -144,7 +143,7 @@ void drawCiel()
  * Return: Void
  *
  */
-void drawWall ()
+void drawWall(void)
 {
 	const double DIST_TO_PLANE_OF_PROJECTION = 1.0;
 
@@ -172,7 +171,7 @@ void drawWall ()
 			int texture_x = 0, texture_y = 0;
 			Uint8 r, g, b;
 			Uint32 wallColor = 0;
-			
+
 			if (horizontal_distance > DIST_TO_PLANE_OF_PROJECTION)
 
 			{
@@ -188,7 +187,7 @@ void drawWall ()
 			r = *(((Uint8 *) (wall_img_surf->pixels))
 			      + texture_y * 3 * 128 + 3 * texture_x + 0);
 			g = *(((Uint8 *) (wall_img_surf->pixels))
-			      + texture_y * 3*128 + 3*texture_x + 1);
+			      + texture_y * 3 * 128 + 3*texture_x + 1);
 			b = *(((Uint8 *) (wall_img_surf->pixels))
 			      + texture_y * 3 * 128 + 3 * texture_x + 2);
 			color = 255.0 * exp(-horizontal_distance / 30);
@@ -196,10 +195,8 @@ void drawWall ()
 			wallColor = (((((b << 8) + g) << 8) + r) << 8) + 255;
 			*(((Uint32 *) pixels) + SCREEN_WIDTH * y + x) = wallColor;
 		}
-
 	}
 }
-
 /*
  * drawScreen - a function that draws every thing on the screen
  * @renderer: a renderer on which every thing is displayed
@@ -213,7 +210,6 @@ void drawScreen(SDL_Renderer *renderer, SDL_Texture *screen)
 	int pitch;
 	
 	SDL_LockTexture(screen, NULL, &pixels, &pitch);
-	
 	drawFloor();
 	drawCiel();
 	drawWall();
