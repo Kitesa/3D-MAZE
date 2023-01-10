@@ -8,7 +8,7 @@
  *
  * Return: nothing
  **/
-void playerWeapon()
+void playerWeapon(void)
 {
 	/** variables for the sdl, width & height **/
 	const int SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480;
@@ -16,7 +16,6 @@ void playerWeapon()
 	SDL_Rect gun;
 	int w, h;
 	SDL_Surface *surf = IMG_Load("../images/gun1.png");
-	
 	/** if the image found **/
 	if (surf)
 	{
@@ -29,7 +28,6 @@ void playerWeapon()
 		gun.w = w * gun_scale, gun.h =  h * gun_scale;
 		gun.x = (SCREEN_WIDTH - gun.w) / 2;
 		gun.y = (SCREEN_HEIGHT - gun.h) + 10;
-		
 		/** draw the weapon with the above specification **/
 		if (texture)
 			SDL_RenderCopy(renderer, texture, NULL, &gun);
