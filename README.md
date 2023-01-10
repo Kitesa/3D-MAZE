@@ -3,6 +3,9 @@
 
 
 This is a 3D-maze game written using SDL and raycasting in C.
+Workflow
+![flowchart](https://user-images.githubusercontent.com/67538957/211578074-bcbf9320-664f-4465-b59a-0ff6f3c33811.png)
+
 
 >>> compile using "gcc -Wall -pedantic -Werror -Wextra -std=gnu89 *.c -lm -lSDL2 -lSDL2_image -o maze" in src directory of the project
 
