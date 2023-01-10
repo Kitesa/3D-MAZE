@@ -1,4 +1,6 @@
 ===============3D Maze game============
+![blogpost](https://user-images.githubusercontent.com/67538957/211563340-4a81e371-cd86-4e05-8994-e2ccd1f6226d.png)
+
 
 This is a 3D-maze game written using SDL and raycasting in C.
 
