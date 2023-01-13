@@ -60,5 +60,5 @@ int runGame(void){
 	SDL_DestroyTexture(screen);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-	return(1);
+	return (1);
 }
